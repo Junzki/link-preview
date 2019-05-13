@@ -1,0 +1,15 @@
+hash: 61be463d0488c69cbcebd04e236f534ee9aca3dd22dce5c615a06f1a1be16fcd
+updated: 2019-05-12T20:09:24.242316+08:00
+imports:
+- name: github.com/andybalholm/cascadia
+  version: 901648c87902174f774fac311d7f176f8647bdaa
+- name: github.com/djimenez/iconv-go
+  version: 8960e66bd3dacbc8773962b40eb82fc18c63c127
+- name: github.com/PuerkitoBio/goquery
+  version: 2d2796f41742ece03e8086188fa4db16a3a0b458
+- name: golang.org/x/net
+  version: a4d6f7feada510cc50e69a37b484cb0fdc6b7876
+  subpackages:
+  - html
+  - html/atom
+testImports: []

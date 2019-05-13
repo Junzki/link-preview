@@ -1,0 +1,7 @@
+package: link-preview
+import:
+- package: github.com/PuerkitoBio/goquery
+  version: ^1.5.0
+- package: github.com/djimenez/iconv-go
+- package: github.com/andybalholm/cascadia
+  version: ^1.0.0
