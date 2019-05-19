@@ -45,6 +45,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Coverage
+coverage.txt
+profile.out
+
 ## Python Environment
 # Byte-compiled / optimized / DLL files
 __pycache__/
