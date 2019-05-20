@@ -45,6 +45,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Package control
+glide.lock
+
 ## Python Environment
 # Byte-compiled / optimized / DLL files
 __pycache__/
