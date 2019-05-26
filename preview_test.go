@@ -60,3 +60,35 @@ func TestPreviewFallback(t *testing.T) {
 	assert.Equal(t, "http://custom-domain.local/favicon.ico", result.ImageURL)
 	assert.Equal(t, link, result.Link)
 }
+
+
+func TestRedirect(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		target := r.URL
+		query := target.Query()
+		redir := query.Get("redirect")
+
+		query.Set("redirect", "true")
+		target.RawQuery = query.Encode()
+
+
+		if "" == redir {
+			http.Redirect(w, r, target.String(), http.StatusFound)
+		}
+
+		buf, err := ioutil.ReadFile("test_cases/case_fallback.html")
+		if nil != err {
+			panic(err)
+		}
+
+		content := string(buf)
+		fmt.Fprint(w, content)
+	}))
+
+	result, err := PreviewLink(server.URL, nil)
+	if nil != err {
+		t.Error(err)
+	}
+
+	assert.Equal(t, "Title", result.Title)
+}
