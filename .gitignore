@@ -49,6 +49,9 @@ Temporary Items
 coverage.txt
 profile.out
 
+# Package control
+glide.lock
+
 ## Python Environment
 # Byte-compiled / optimized / DLL files
 __pycache__/
