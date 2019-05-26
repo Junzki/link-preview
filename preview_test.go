@@ -63,6 +63,9 @@ func TestPreviewFallback(t *testing.T) {
 
 
 func TestRedirect(t *testing.T) {
+	// This test shows that Go's built in http client can follow redirects automatically.
+	// Check out this for solution to disable this feature:
+	// - https://stackoverflow.com/questions/23297520/how-can-i-make-the-go-http-client-not-follow-redirects-automatically
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		target := r.URL
 		query := target.Query()
