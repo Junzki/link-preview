@@ -18,7 +18,7 @@ func TestPreviewStandard(t *testing.T) {
 		}
 
 		content := string(buf)
-		fmt.Fprint(w, content)
+		_, _ = fmt.Fprint(w, content)
 	}))
 
 	link := "http://custom-domain.local/case.html"
@@ -44,7 +44,7 @@ func TestPreviewFallback(t *testing.T) {
 		}
 
 		content := string(buf)
-		fmt.Fprint(w, content)
+		_, _ = fmt.Fprint(w, content)
 	}))
 
 	link := "http://custom-domain.local/case.html"
@@ -85,7 +85,7 @@ func TestRedirect(t *testing.T) {
 		}
 
 		content := string(buf)
-		fmt.Fprint(w, content)
+		_, _ = fmt.Fprint(w, content)
 	}))
 
 	result, err := PreviewLink(server.URL, nil)
