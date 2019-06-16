@@ -10,10 +10,6 @@ type StandardLinkPreview struct {
 	*LinkPreviewContext
 }
 
-
-
-
-
 func (p *StandardLinkPreview) Preview() error {
 	err := p.request()
 
@@ -24,7 +20,6 @@ func (p *StandardLinkPreview) Preview() error {
 	err = p.readTags()
 	return err
 }
-
 
 func (p *StandardLinkPreview) readTags() error {
 	titleNode := p.Parsed.Find("html > head > title")
@@ -72,7 +67,6 @@ func (p *StandardLinkPreview) readTags() error {
 	return nil
 }
 
-
 func (p *StandardLinkPreview) parseMetaContent(node *html.Node) string {
 	var content string
 	for _, attr := range node.Attr {
@@ -87,7 +81,6 @@ func (p *StandardLinkPreview) parseMetaContent(node *html.Node) string {
 
 	return content
 }
-
 
 func (p *StandardLinkPreview) parseMetaProperties(nodeType string, node *html.Node) {
 	nodeType = strings.ToLower(nodeType)

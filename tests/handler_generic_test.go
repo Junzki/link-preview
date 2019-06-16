@@ -9,7 +9,7 @@ import (
 func TestGetHandler(t *testing.T) {
 	cxt := handlers.LinkPreviewContext{
 		TargetType: handlers.StandardMetaTags,
-		Link: "https://golang.org",
+		Link:       "https://golang.org",
 	}
 
 	handler, err := handlers.GetPreviewHandler(&cxt)
@@ -21,7 +21,7 @@ func TestGetHandler(t *testing.T) {
 func TestGetHandlerBadTargetType(t *testing.T) {
 	cxt := handlers.LinkPreviewContext{
 		TargetType: -1,
-		Link: "https://golang.org",
+		Link:       "https://golang.org",
 	}
 
 	handler, err := handlers.GetPreviewHandler(&cxt)

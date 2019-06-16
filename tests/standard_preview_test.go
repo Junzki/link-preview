@@ -10,7 +10,6 @@ import (
 	"testing"
 )
 
-
 func TestPreviewStandard(t *testing.T) {
 	server, serverErr := serveLocalFile("test_cases/case_standard.html")
 	if nil != serverErr {
@@ -22,8 +21,8 @@ func TestPreviewStandard(t *testing.T) {
 
 	cxt := &handlers.LinkPreviewContext{
 		TargetType: handlers.StandardMetaTags,
-		Link: link,
-		Client: client,
+		Link:       link,
+		Client:     client,
 	}
 
 	handler := handlers.StandardLinkPreview{
@@ -31,16 +30,15 @@ func TestPreviewStandard(t *testing.T) {
 	}
 
 	err := handler.Preview()
- 	if nil != err {
- 		t.Error(err)
+	if nil != err {
+		t.Error(err)
 	}
 
- 	assert.Equal(t, "test-title", handler.Title)
- 	assert.Equal(t, "test-desc", handler.Description)
- 	assert.Equal(t, "http://fake-image-url.image.png", handler.ImageURL)
- 	assert.Equal(t, link, handler.Link)
+	assert.Equal(t, "test-title", handler.Title)
+	assert.Equal(t, "test-desc", handler.Description)
+	assert.Equal(t, "http://fake-image-url.image.png", handler.ImageURL)
+	assert.Equal(t, link, handler.Link)
 }
-
 
 func TestPreviewFallback(t *testing.T) {
 	server, serverErr := serveLocalFile("test_cases/case_standard_fallback.html")
@@ -53,8 +51,8 @@ func TestPreviewFallback(t *testing.T) {
 
 	cxt := &handlers.LinkPreviewContext{
 		TargetType: handlers.StandardMetaTags,
-		Link: link,
-		Client: client,
+		Link:       link,
+		Client:     client,
 	}
 
 	handler := handlers.StandardLinkPreview{
@@ -72,7 +70,6 @@ func TestPreviewFallback(t *testing.T) {
 	assert.Equal(t, link, handler.Link)
 }
 
-
 func TestRedirect(t *testing.T) {
 	// This test shows that Go's built in http client can follow redirects automatically.
 	// Check out this for solution to disable this feature:
@@ -84,7 +81,6 @@ func TestRedirect(t *testing.T) {
 
 		query.Set("redirect", "true")
 		target.RawQuery = query.Encode()
-
 
 		if "" == redir {
 			http.Redirect(w, r, target.String(), http.StatusFound)
@@ -104,8 +100,8 @@ func TestRedirect(t *testing.T) {
 
 	cxt := &handlers.LinkPreviewContext{
 		TargetType: handlers.StandardMetaTags,
-		Link: link,
-		Client: client,
+		Link:       link,
+		Client:     client,
 	}
 
 	handler := handlers.StandardLinkPreview{

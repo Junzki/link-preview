@@ -14,30 +14,26 @@ const (
 	WeChatMP
 )
 
-
 type HTMLMetaAttr struct {
-	Key		string
-	Value   string
+	Key   string
+	Value string
 }
-
 
 type LinkPreviewContext struct {
-	TargetType	int		`json:"-"`
-	Title		string	`json:"title"`
-	Description	string	`json:"description"`
-	ImageURL	string	`json:"image"`
-	Link		string	`json:"website"`
+	TargetType  int    `json:"-"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	ImageURL    string `json:"image"`
+	Link        string `json:"website"`
 
-	Client      *http.Request   	`json:"-"`
-	Parsed      *goquery.Document	`json:"-"`
+	Client *http.Request     `json:"-"`
+	Parsed *goquery.Document `json:"-"`
 }
-
 
 func (p *LinkPreviewContext) initClient() {
 	client, _ := http.NewRequest("GET", p.Link, nil)
 	p.Client = client
 }
-
 
 func (p *LinkPreviewContext) request() error {
 	res, err := http.DefaultClient.Do(p.Client)
@@ -45,7 +41,6 @@ func (p *LinkPreviewContext) request() error {
 		return err
 	}
 	defer res.Body.Close()
-
 
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	if nil != err {
@@ -55,7 +50,6 @@ func (p *LinkPreviewContext) request() error {
 	p.Parsed = doc
 	return nil
 }
-
 
 func (p *LinkPreviewContext) parseFavicon(node *html.Node) {
 	var link string
@@ -92,12 +86,9 @@ func (p *LinkPreviewContext) parseFavicon(node *html.Node) {
 	}
 }
 
-
-
 type PreviewHandler interface {
 	Preview() error
 }
-
 
 func GetPreviewHandler(c *LinkPreviewContext) (PreviewHandler, error) {
 	if nil == c {

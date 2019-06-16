@@ -9,14 +9,12 @@ import (
 	"testing"
 )
 
-
 func TestMain(m *testing.M) {
 	// Change working dir (cwd) to project root.
 	_ = os.Chdir("../")
 
 	os.Exit(m.Run())
 }
-
 
 func serveLocalFile(filename string) (*httptest.Server, error) {
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
