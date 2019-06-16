@@ -18,7 +18,7 @@ import (
 func main() {
     link := "http://custom-domain.local/case.html"
     
-    result, err := link_preview.PreviewLink(link, nil)
+    result, err := LinkPreview.Preview(link, nil)
     if err != nil {
     	panic(err)
     }
