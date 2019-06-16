@@ -14,6 +14,34 @@ const (
 	WeChatMP
 )
 
+type PreviewHandler interface {
+	PreviewContext() *LinkPreviewContext
+	Preview() (*LinkPreviewContext, error)
+}
+
+func GetPreviewHandler(c *LinkPreviewContext) (PreviewHandler, error) {
+	if nil == c {
+		return nil, errors.New("bad link preview cxt, nil given")
+	}
+
+	if nil == c.Client {
+		c.initClient()
+	}
+
+	var handler PreviewHandler
+
+	switch c.TargetType {
+	case StandardMetaTags:
+		handler = &StandardLinkPreview{
+			c,
+		}
+	default:
+		return nil, errors.New("unknown target type")
+	}
+
+	return handler, nil
+}
+
 type HTMLMetaAttr struct {
 	Key   string
 	Value string
@@ -28,6 +56,10 @@ type LinkPreviewContext struct {
 
 	Client *http.Request     `json:"-"`
 	Parsed *goquery.Document `json:"-"`
+}
+
+func (p *LinkPreviewContext) PreviewContext() *LinkPreviewContext {
+	return p
 }
 
 func (p *LinkPreviewContext) initClient() {
@@ -86,29 +118,4 @@ func (p *LinkPreviewContext) parseFavicon(node *html.Node) {
 	}
 }
 
-type PreviewHandler interface {
-	Preview() error
-}
 
-func GetPreviewHandler(c *LinkPreviewContext) (PreviewHandler, error) {
-	if nil == c {
-		return nil, errors.New("bad link preview cxt, nil given")
-	}
-
-	if nil == c.Client {
-		c.initClient()
-	}
-
-	var handler PreviewHandler
-
-	switch c.TargetType {
-	case StandardMetaTags:
-		handler = &StandardLinkPreview{
-			c,
-		}
-	default:
-		return nil, errors.New("unknown target type")
-	}
-
-	return handler, nil
-}

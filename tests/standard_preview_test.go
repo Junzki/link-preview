@@ -11,7 +11,7 @@ import (
 )
 
 func TestPreviewStandard(t *testing.T) {
-	server, serverErr := serveLocalFile("test_cases/case_standard.html")
+	server, serverErr := ServeLocalFile("test_cases/case_standard.html")
 	if nil != serverErr {
 		t.Error(serverErr.Error())
 	}
@@ -29,7 +29,7 @@ func TestPreviewStandard(t *testing.T) {
 		cxt,
 	}
 
-	err := handler.Preview()
+	_, err := handler.Preview()
 	if nil != err {
 		t.Error(err)
 	}
@@ -41,7 +41,7 @@ func TestPreviewStandard(t *testing.T) {
 }
 
 func TestPreviewFallback(t *testing.T) {
-	server, serverErr := serveLocalFile("test_cases/case_standard_fallback.html")
+	server, serverErr := ServeLocalFile("test_cases/case_standard_fallback.html")
 	if nil != serverErr {
 		t.Error(serverErr.Error())
 	}
@@ -59,7 +59,7 @@ func TestPreviewFallback(t *testing.T) {
 		cxt,
 	}
 
-	err := handler.Preview()
+	_, err := handler.Preview()
 	if err != nil {
 		t.Error(err)
 	}
@@ -108,7 +108,7 @@ func TestRedirect(t *testing.T) {
 		cxt,
 	}
 
-	err := handler.Preview()
+	_, err := handler.Preview()
 	if nil != err {
 		t.Error(err)
 	}

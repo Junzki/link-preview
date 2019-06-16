@@ -10,15 +10,19 @@ type StandardLinkPreview struct {
 	*LinkPreviewContext
 }
 
-func (p *StandardLinkPreview) Preview() error {
+func (p *StandardLinkPreview) Preview() (*LinkPreviewContext, error) {
 	err := p.request()
 
 	if nil != err {
-		return err
+		return nil, err
 	}
 
 	err = p.readTags()
-	return err
+	if nil != err {
+		return nil, err
+	}
+
+	return p.PreviewContext(), nil
 }
 
 func (p *StandardLinkPreview) readTags() error {
